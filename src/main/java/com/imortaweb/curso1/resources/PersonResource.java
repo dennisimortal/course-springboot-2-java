@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.imortaweb.curso1.entities.User;
+import com.imortaweb.curso1.entities.Person;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/persons")
+public class PersonResource {
 
 	@GetMapping
-	public ResponseEntity<User> findAll(){
-		User u = new User(1L, "Maria", "maria@gmail.com", "99999999", "12345");
+	public ResponseEntity<Person> findAll(){
+		Person u = new Person(1L, "Maria", "maria@gmail.com", "99999999", "12345");
 		return ResponseEntity.ok().body(u);
 				
 	}
