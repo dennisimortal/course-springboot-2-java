@@ -13,6 +13,8 @@ import com.imortaweb.curso1.repositores.UserRepository;
 import com.imortaweb.curso1.secrvices.exceptions.DatabaseException;
 import com.imortaweb.curso1.secrvices.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 
@@ -45,9 +47,14 @@ public class UserService {
 
 	@SuppressWarnings("deprecation")
 	public Person update(Long id, Person obj) {
-		Person entity = repository.getOne(id);
-		updadeData(entity, obj);
-		return repository.save(entity);
+		try {
+			Person entity = repository.getOne(id);
+			updadeData(entity, obj);
+			updadeData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updadeData(Person entity, Person obj) {
